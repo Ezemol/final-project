@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{% block title %}Mundo Alado{% endblock %}</title>
+        <link rel="stylesheet" href="static/styles.css">
+        <link rel="stylesheet" href="index.js">
+    </head>
+    <body>  
+        <nav class="upper-bar">
+            <ul class="nav-links">
+                <li class="link">
+                    <a href="#">All birds</a>
+                </li>
+                <li class="link">
+                    <a href="#">Find birds</a>
+                </li>
+                {% if request.user.is_autenticated %}
+                    <li class="link">
+                        <a href="{% url 'mundoalado:logout' %}">Logout</a>
+                    </li>
+                {% else %}
+                    <li class="link">
+                        <a href="{% url 'mundoalado:login' %}">Login</a>
+                    </li>
+                    <li class="link">
+                        <a href="{% url 'mundoalado:register' %}">Register</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </nav>
+
+        {% block body %}{% endblock %}
+        {% block script %}{% endblock %}
+    </body>
+</html>
