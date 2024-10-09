@@ -16,7 +16,7 @@
                 <li class="link">
                     <a href="#">Find birds</a>
                 </li>
-                {% if request.user.is_autenticated %}
+                {% if request.user.is_authenticated %}
                     <li class="link">
                         <a href="{% url 'mundoalado:logout' %}">Logout</a>
                     </li>

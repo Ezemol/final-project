@@ -30,7 +30,7 @@ def login_view(request):
             return render(request, "mundoalado/index.html")  # Redirigir al índice
         else:
             return render(request, "mundoalado/login.html", {
-                "message": "Invalid username and/or password."  # Mensaje de error
+                "message": "Nombre de usuario y/o contraseña inválidas."  # Mensaje de error
             })
     else:
         return render(request, "mundoalado/login.html")  # Renderizar la vista de inicio de sesión
@@ -51,20 +51,33 @@ def register(request):
         confirmation = request.POST["confirmation"]
         if password != confirmation:
             return render(request, "mundoalado/register.html", {
-                "message": "Passwords must match."  # Mensaje de error
+                "message": "Las contraseñas deben coincidir."  # Mensaje de error
             })
 
         if not username or not email or not password or not confirmation:
             return render(request, "mundoalado/register.html", {
-                "message": "You have to complete all the fields."
+                "message": "Debes completar todos los campos"
             })
+        
+        if len(password) < 8:
+            return render(request, "mundoalado/register.html", {
+                "message": "La contraseña debe tener al menos 8 caracteres."
+            })
+        
+        try:
+            validate_password(password)
+        except ValidationError as e:
+            return render(request, "mundoalado/register.html", {
+                "message": e.messages  # Mostrará las razones del error de validación
+            })
+
         # Intentar crear un nuevo usuario
         try:
             user = User.objects.create_user(username, email, password)
             user.save()  # Guardar el usuario en la base de datos
         except IntegrityError:
             return render(request, "mundoalado/register.html", {
-                "message": "Username already taken."  # Mensaje de error
+                "message": "Nombre de usuario ya tomado."  # Mensaje de error
             })
         login(request, user)  # Iniciar sesión con el nuevo usuario
         return render(request, "mundoalado/index.html")  # Redirigir al índice
