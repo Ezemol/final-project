@@ -1,11 +1,13 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>{% block title %}Mundo Alado{% endblock %}</title>
-        <link rel="stylesheet" href="static/styles.css">
-        <link rel="stylesheet" href="index.js">
+        <link rel="stylesheet" href="{% static 'styles.css' %}">
+        <link rel="stylesheet" href="{% static 'index.js' %}">
     </head>
     <body>  
         <nav class="upper-bar">
@@ -31,7 +33,11 @@
             </ul>
         </nav>
 
-        {% block body %}{% endblock %}
+        {% block body %}
+            <div  class="logo-container">
+                <img src="{% static 'images/logo-mundo-alado.jpeg' %}" alt="Logo Mundo Alado" class="logo-img">
+            </div>                
+        {% endblock %}
         {% block script %}{% endblock %}
     </body>
 </html>

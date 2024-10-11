@@ -36,6 +36,7 @@ def login_view(request):
         return render(request, "mundoalado/login.html")  # Renderizar la vista de inicio de sesión
 
 
+@login_required
 def logout_view(request):
     logout(request)  # Cerrar sesión
     return render(request, "mundoalado/index.html")  # Redirigir al índice

@@ -53,3 +53,16 @@ body{
 .link a:hover::after{
     width: 70%;
 }
+
+.logo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo-img {
+    width: 50px;  /* Ajusta el tamaño del círculo */
+    height: 50px;
+    border-radius: 50%;  /* Hace la imagen circular */
+    object-fit: cover;  /* Asegura que la imagen se recorte correctamente */
+}
